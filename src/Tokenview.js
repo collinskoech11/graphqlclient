@@ -1,9 +1,9 @@
 import React from 'react'
 
-function tokenview() {
+function Tokenview() {
   return (
     <div>tokenview</div>
   )
 }
 
-export default tokenview
+export default Tokenview
