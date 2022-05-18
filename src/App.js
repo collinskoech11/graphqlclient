@@ -1,23 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import { useQuery, gql } from "@apollo/client";
+
+
+const MyQuery = gql`
+query{
+  book {
+    pages {
+      content
+      pageIndex
+      tokens {
+        position
+        value
+      }
+    }
+    author
+    title
+  }
+}
+
+`
 
 function App() {
+  const {data, loading, error } = useQuery(MyQuery);
+
+  if(loading) return "Loading...";
+  if(error) return <pre>{error.message}</pre>
+  console.log(data)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1> Hello World </h1>
+      <ul>
+      {data.book.pages.map((page) => (
+        <li key={page.pageIndex}>{page.content}</li>
+      ))}
+      </ul>
     </div>
   );
 }
