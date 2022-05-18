@@ -28,12 +28,17 @@ function App() {
   console.log(data)
   return (
     <div className="App">
-      <h1> Hello World </h1>
-      <ul>
-      {data.book.pages.map((page) => (
-        <li key={page.pageIndex}>{page.content}</li>
-      ))}
-      </ul>
+      <div className="title">
+        <h1> {data.book.author} </h1>
+      </div>
+      
+        <ul>
+        {data.book.pages.map((page) => (
+          <div className="content">
+          <li key={page.pageIndex}>{page.content}</li>
+          </div>
+        ))}
+        </ul>
     </div>
   );
 }
